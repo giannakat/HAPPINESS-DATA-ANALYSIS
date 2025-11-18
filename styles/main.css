@@ -1,0 +1,20 @@
+.stApp {
+    margin: 0 auto;
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+    color: #5e32fc;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stApp h3 {
+    font-size: 1.8rem;
+}
+
+.stApp h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+}
