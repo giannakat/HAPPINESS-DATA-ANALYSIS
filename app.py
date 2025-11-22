@@ -21,19 +21,19 @@ with tabs[0]:
     with col2:
         st.image("assets/happiness.jpg", use_container_width=True)
 
-st.subheader("Research Question")
-st.write("""
-The goal of this project is to identify and understand which factors have the greatest 
-influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
-the following questions:
-""")
+    st.subheader("Research Question")
+    st.write("""
+    The goal of this project is to identify and understand which factors have the greatest 
+    influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
+    the following questions:
+    """)
 
-st.markdown("""
-- **Which variables are most strongly correlated with happiness scores?**  
-- **How do these contributing factors differ among countries or regions?**  
-- **Can we group countries into clusters based on their happiness-related indicators?**  
-- **Can we predict happiness scores based on measurable socioeconomic factors?**
-""")
+    st.markdown("""
+    - **Which variables are most strongly correlated with happiness scores?**  
+    - **How do these contributing factors differ among countries or regions?**  
+    - **Can we group countries into clusters based on their happiness-related indicators?**  
+    - **Can we predict happiness scores based on measurable socioeconomic factors?**
+    """)
 
 with tabs[1]:
     st.write("Display the dataset's structure (e.g., tables, column descriptions) using Streamlit's data visualization tools.")

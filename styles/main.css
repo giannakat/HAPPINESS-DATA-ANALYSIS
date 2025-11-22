@@ -18,3 +18,66 @@ h1 {
     font-weight: 700;
     text-align: center;
 }
+
+/* ---------------- NAVIGATION TAB ---------------- */
+/* .stTabs [data-baseweb="tab-list"] {
+    justify-content: space-between;
+}
+
+.stTabs [data-baseweb="tab"] {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.tab-content {
+    min-height: 1800px;
+} */
+
+/* removed built-in tab indicator*/
+.st-c7 {
+    height: 0 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.st-ca {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.st-aq {
+    gap: 0 !important;
+}
+
+.st-emotion-cache-tn0cau {
+    min-height: 800px; /* set minimum height to each tab content */
+}
+
+button[role="tab"]:focus {
+    outline: none !important;
+}
+
+/* Tab container */
+.stTabs [role="tablist"] {
+    justify-content: space-between;
+}
+
+/* Tabs */
+.stTabs [role="tab"] {
+    flex-grow: 1;
+    text-align: center;
+    background-color: #f6f6f6;
+    padding: 8px 18px;
+    border-radius: 0;
+    color: #555;
+    font-weight: 500;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+/* Selected Tab */
+.stTabs [aria-selected="true"] {
+    background-color: #0f6a69;
+    color: white;
+    border: 1px solid #0c5a59;
+}
