@@ -22,57 +22,119 @@ with tabs[0]:
         color: #0f6a69;
     }
     </style>
-
+    <br>
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
     UNDERSTANDING<br> 
-    <span class="global-happiness" style="color:#0f6a69; font-size:4.8rem;">GLOBAL HAPPINESS</span><br> 
+    <span class="global-happiness" style="color:#FDB12A; font-size:4.8rem;">GLOBAL HAPPINESS</span><br> 
     THROUGH DATA ANALYSIS
     </h1>
+    <br><br><br>
     """, unsafe_allow_html=True)
-    # col1, col2 = st.columns([1, 2])
-    # with col1:
-    #     st.subheader("WORLD HAPPINESS")
-    
-    # with col2:
-    #     st.image("assets/happiness.jpg", use_container_width=True)
 
-    st.divider()
+    col1, col2 = st.columns([2, 2])
+    with col1:
+        st.markdown(
+        """
+        <div style='text-align: justify;'>
+        <h4>Introduction</h4>
+        This project analyzes the <b>World Happiness Report 2024</b> to understand what drives 
+        happiness across nations. By applying correlation, regression, and clustering techniques, 
+        we uncover meaningful patterns and relationships among global well-being indicators.
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+            
+    with col2:
+        st.image("assets/happiness.jpg", use_container_width=True)
 
-    st.subheader("Research Question")
-    st.write("""
-    The goal of this project is to identify and understand which factors have the greatest 
-    influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
-    the following questions:
-    """)
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
 
-    st.markdown("""
-    - **Which variables are most strongly correlated with happiness scores?**  
-    - **How do these contributing factors differ among countries or regions?**  
-    - **Can we group countries into clusters based on their happiness-related indicators?**  
-    - **Can we predict happiness scores based on measurable socioeconomic factors?**
-    """)
 
-    st.divider()
+    with st.container(border=True):
+        st.subheader("Research Question")
+        st.write("""
+        The goal of this project is to identify and understand which factors have the greatest 
+        influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
+        the following questions:
+        """)
+
+        st.markdown("""
+        - **Which variables are most strongly correlated with happiness scores?**  
+        - **How do these contributing factors differ among countries or regions?**  
+        - **Can we group countries into clusters based on their happiness-related indicators?**  
+        - **Can we predict happiness scores based on measurable socioeconomic factors?**
+        """)
+
+    st.write("")
+    st.write("")
+    st.write("")
 
     st.subheader("Chosen Data Analysis Technique")
-    st.markdown("""
-    - **Descriptive Analysis** To summarize and visualize the distribution of happiness scores and key indicators using charts and tables.
-    - **Correlation Analysis** To determine which variables are most strongly related to the happiness score.
-    - **Multiple Linear Regression** To model the relationship between happiness and its predictors (GDP, social support, life expectancy, etc.) and estimate the relative influence of each factor.
-    - **Cluster Analysis** To group countries with similar happiness profiles and identify regional or socioeconomic patterns among these clusters. Techniques such as K-Means Clustering will be explored for this purpose.
-    """)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+            <b>Descriptive Analysis</b><br>
+            Summarizes the distribution of happiness scores and key indicators.
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+            <b>Correlation Analysis</b><br>
+            Examines relationships between happiness scores and related variables.
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+            <b>Multiple Linear Regression</b><br>
+            Models how predictors such as GDP and social support influence happiness.
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+            <b>Cluster Analysis</b><br>
+            Groups countries with similar happiness profiles (e.g., via K-Means).
+        </div>
+        """, unsafe_allow_html=True)
+
 
     st.divider()
 
     st.subheader("Expected Outcome")
 
-    st.write("""
-    We expect to identify the key factors that most significantly influence happiness and visualize their effects through correlation and regression analysis. Through cluster analysis, we also aim to discover groups of countries with similar happiness characteristics, revealing global patterns based on socioeconomic and cultural similarities.
-    These findings can help provide meaningful insights into how different factors contribute to happiness, supporting research and policy discussions about improving quality of life worldwide.
-    """)
+    st.markdown("""
+    <div style='padding: 15px; background-color:#FFF8E1; border-left: 4px solid #FDB12A; border-radius: 8px; text-align: justify;'>
+    This study is expected to identify the key factors that most significantly influence national
+    happiness scores. Through correlation and regression analysis, we aim to quantify the impact
+    of indicators such as GDP, social support, life expectancy, freedom, and generosity.  
+    Cluster analysis is expected to reveal groups of countries with similar happiness profiles,
+    highlighting regional patterns and socioeconomic similarities.  
+    <br>
+    Overall, these findings will provide actionable insights into global well-being and help
+    policymakers understand which areas require attention to improve quality of life.</div>
+    """, unsafe_allow_html=True)
+
+    st.write("")
+    st.write("")
+    st.write("")
     
     with st.expander('References'):
-        st.write("link")
+        st.write("Dataset: https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024")
 
 # DATASET
 with tabs[1]:

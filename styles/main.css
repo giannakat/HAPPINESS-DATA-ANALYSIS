@@ -83,7 +83,7 @@ button[role="tab"]:focus {
 
 /* Selected Tab */
 .stTabs [aria-selected="true"] {
-    background-color: #0f6a69;
+    background-color: #FBC02D;
     color: white;
-    border: 1px solid #0c5a59;
+    border: 1px solid #FBC02D;
 }
