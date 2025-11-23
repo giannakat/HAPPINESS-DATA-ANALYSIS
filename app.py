@@ -51,28 +51,38 @@ with tabs[0]:
     st.write("")
     st.write("")
     st.write("")
+
+    st.divider()
+
+    st.subheader("Research Question")
+    st.write("""
+    The goal of this project is to identify and understand which factors have the greatest 
+    influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
+    the following questions:
+    """)
+
+    # List of research questions
+    questions = [
+        "Which variables are most strongly correlated with happiness scores?",
+        "How do these contributing factors differ among countries or regions?",
+        "Can we group countries into clusters based on their happiness-related indicators?",
+        "Can we predict happiness scores based on measurable socioeconomic factors?"
+    ]
+
+    # Display each question in a box
+    for q in questions:
+        st.markdown(f"""
+        <div style='padding: 15px; margin-bottom: 10px; background-color:#FFF8E1; 
+                    border-left: 4px solid #FBC02D; border-radius: 8px;'>
+            <b>{q}</b>
+        </div>
+        """, unsafe_allow_html=True)
+
+
     st.write("")
     st.write("")
 
-
-    with st.container(border=True):
-        st.subheader("Research Question")
-        st.write("""
-        The goal of this project is to identify and understand which factors have the greatest 
-        influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
-        the following questions:
-        """)
-
-        st.markdown("""
-        - **Which variables are most strongly correlated with happiness scores?**  
-        - **How do these contributing factors differ among countries or regions?**  
-        - **Can we group countries into clusters based on their happiness-related indicators?**  
-        - **Can we predict happiness scores based on measurable socioeconomic factors?**
-        """)
-
-    st.write("")
-    st.write("")
-    st.write("")
+    st.divider()
 
     st.subheader("Chosen Data Analysis Technique")
 
@@ -112,6 +122,9 @@ with tabs[0]:
         </div>
         """, unsafe_allow_html=True)
 
+
+    st.write("")
+    st.write("")
 
     st.divider()
 
