@@ -11,14 +11,30 @@ df = pd.read_csv("WHR2024.csv")
 tabs = st.tabs(["Overview", "Dataset", "Exploration", "Analysis", "Conclusions"])
 
 with tabs[0]:
-    st.title("UNDERSTANDING GLOBAL HAPPINESS THROUGH DATA ANALYSIS")   
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+
+    .global-happiness {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 800;
+        font-size: 2.8rem;
+        color: #0f6a69;
+    }
+    </style>
+
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    UNDERSTANDING<br> 
+    <span class="global-happiness" style="color:#0f6a69; font-size:4.8rem;">GLOBAL HAPPINESS</span><br> 
+    THROUGH DATA ANALYSIS
+    </h1>
+    """, unsafe_allow_html=True)
+    # col1, col2 = st.columns([1, 2])
+    # with col1:
+    #     st.subheader("WORLD HAPPINESS")
     
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        st.subheader("WORLD HAPPINESS")
-    
-    with col2:
-        st.image("assets/happiness.jpg", use_container_width=True)
+    # with col2:
+    #     st.image("assets/happiness.jpg", use_container_width=True)
 
     st.divider()
 
