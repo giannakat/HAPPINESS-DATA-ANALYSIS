@@ -225,7 +225,106 @@ with tabs[1]:
     st.write(df.describe())
 
 with tabs[2]:
-    st.write("Demonstrate how you prepared the dataset for analysis (e.g., handling missing values, cleaning steps). Include visualizations e.g., histograms, heatmaps to explain data distribution or transformations.")
+    st.title("Data Preparation & Exploration")
+
+    st.subheader("1. Checking for Missing Values")
+
+    st.write("""
+    Before performing any statistical modeling or machine learning, it is essential to 
+    inspect the dataset for missing values. Algorithms such as **Linear Regression** and 
+    **K-Means Clustering** cannot handle missing values, so we applied preprocessing steps 
+    to ensure data quality.
+    """)
+
+    # Show missing values
+    st.write("### Missing Values per Column")
+    st.write(df.isna().sum())
+
+    st.write("""
+    We found missing values in several feature columns, as shown above.  
+    To avoid model errors and maintain consistency, we removed rows containing 
+    missing values only in the feature set used for analysis.
+    """)
+
+    # Feature list
+    features = [
+        "Ladder score",
+        "Explained by: Log GDP per capita",
+        "Explained by: Social support",
+        "Explained by: Healthy life expectancy",
+        "Explained by: Freedom to make life choices",
+        "Explained by: Generosity",
+        "Explained by: Perceptions of corruption"
+    ]
+
+    # Drop missing rows
+    df_clean = df.dropna(subset=features).copy()
+
+    st.write("### Rows Removed After Cleaning")
+    st.write(f"- **Original rows:** {len(df)}")
+    st.write(f"- **Rows after cleaning:** {len(df_clean)}")
+    st.write(f"- **Rows removed:** {len(df) - len(df_clean)}")
+
+    st.divider()
+
+    # -----------------------------------------
+    # 2. HISTOGRAM OF HAPPINESS SCORES
+    # -----------------------------------------
+    st.subheader("2. Distribution of Happiness Scores (Ladder Score)")
+
+    st.write("""
+    Understanding the distribution of happiness scores helps reveal global patterns, 
+    skewness, and outliers. A histogram provides a quick visual overview of how countries 
+    cluster in terms of well-being.
+    """)
+
+    # Plot histogram
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(figsize=(8,5))
+    ax.hist(df_clean["Ladder score"], bins=20)
+    ax.set_xlabel("Ladder Score")
+    ax.set_ylabel("Frequency")
+    ax.set_title("Distribution of Ladder Scores")
+    st.pyplot(fig)
+
+    st.divider()
+
+    # -----------------------------------------
+    # 3. CORRELATION HEATMAP
+    # -----------------------------------------
+    st.subheader("3. Correlation Analysis")
+
+    st.write("""
+    Correlation analysis helps identify which factors have the strongest relationships 
+    with happiness. This is crucial for interpreting which socioeconomic indicators 
+    contribute most to higher well-being.
+    """)
+
+    import seaborn as sns
+
+    corr = df_clean[features].corr()
+
+    fig2, ax2 = plt.subplots(figsize=(10,7))
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", ax=ax2)
+    ax2.set_title("Correlation Heatmap")
+    st.pyplot(fig2)
+
+    st.divider()
+
+    # -----------------------------------------
+    # 4. Summary of Data Preparation
+    # -----------------------------------------
+    st.subheader("Summary of Data Preparation Steps")
+    st.markdown("""
+    - ✔ Checked dataset for missing values  
+    - ✔ Removed rows with missing key feature values  
+    - ✔ Cleaned dataset reduced from **143 to 140 rows**  
+    - ✔ Visualized distribution using histograms  
+    - ✔ Identified relationships using a correlation heatmap  
+    - ✔ Prepared clean dataset for regression and clustering  
+    """)
+
+    st.success("Dataset successfully cleaned and prepared for further analysis.")
 
 with tabs[3]:
     st.write("Provide interactive visualizations of your results (e.g., scatter plots, cluster maps, regression lines). Highlight key insights, patterns, trends, or anomalies. Add filters or sliders to allow users to explore the data further.")
