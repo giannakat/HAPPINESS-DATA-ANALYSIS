@@ -58,10 +58,80 @@ with tabs[0]:
     with st.expander('References'):
         st.write("link")
 
+# DATASET
 with tabs[1]:
-    st.write("Display the dataset's structure (e.g., tables, column descriptions) using Streamlit's data visualization tools.")
-    st.dataframe(df, use_container_width=True)
-    # st.write(df.head())   
+    
+    st.title("Dataset Overview")
+
+    #ABOUT THE DATASET
+    st.subheader("About the Dataset")
+
+    st.write("""
+    The **World Happiness Report** is a global survey that evaluates the state of happiness
+    across countries. It is widely used by governments, organizations, and policymakers to
+    understand well-being and guide policy decisions.
+
+    The report combines research from multiple fields—including economics, psychology,
+    public policy, survey analysis, and statistics—to evaluate and compare life
+    satisfaction among nations. Data is primarily sourced from the **Gallup World Poll**.
+
+    **Interpretation of the Columns**  
+    The happiness score (*Ladder Score*) represents each country’s overall life evaluation.
+    The remaining variables estimate the contribution of six key factors:
+    - Economic production (Log GDP per capita)  
+    - Social support  
+    - Healthy life expectancy  
+    - Freedom to make life choices  
+    - Generosity  
+    - Perceptions of corruption  
+
+    These factors do **not directly add up to the total score**, but they help explain why
+    some countries rank higher or lower by comparing them to *Dystopia*—a hypothetical
+    country with the lowest global values for each factor.
+    """)
+
+    st.divider()
+
+    st.write(
+        """
+        Below is a structured summary of the World Happiness Report 2024 dataset,
+        including column names, data types, and descriptions of each variable.
+        """
+    )
+
+    # DATASET PREVIEW
+    with st.expander("📌 Dataset Preview"):
+        st.dataframe(df, use_container_width=True)
+
+    st.divider()
+
+    # STRUCTURE TABLE
+    st.subheader("📊 Dataset Structure")
+
+    structure_df = pd.DataFrame({
+        "Data Type": df.dtypes.astype(str),
+        "Description": [
+            "Name of the country",
+            "Overall happiness (ladder) score",
+            "Upper bound of estimated happiness",
+            "Lower bound of estimated happiness",
+            "Contribution of GDP per capita",
+            "Contribution of social support",
+            "Contribution of healthy life expectancy",
+            "Contribution of freedom to make life choices",
+            "Contribution of generosity",
+            "Contribution of perceived corruption",
+            "Baseline + unexplained component of happiness"
+        ]
+    })
+
+    st.dataframe(structure_df, use_container_width=True)
+
+    st.divider()
+
+    # SUMMARY STATISTICS
+    st.subheader("📈 Summary Statistics")
+    st.write(df.describe())
 
 with tabs[2]:
     st.write("Demonstrate how you prepared the dataset for analysis (e.g., handling missing values, cleaning steps). Include visualizations e.g., histograms, heatmaps to explain data distribution or transformations.")
