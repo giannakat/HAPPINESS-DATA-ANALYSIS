@@ -478,6 +478,15 @@ with tabs[3]:
             - **Japan**: high freedom but average happiness.
             """)
 
+        st.markdown("- **Factor effects change with happiness level**")
+        with st.expander("Why this matters"):
+            st.markdown("""
+            - Countries with low happiness: factors like GDP, freedom, and support → barely make a difference anymore, very small impact.
+            - Countries with high happiness: these factors → much stronger, really boost happiness.
+            - General trend: the happier a country is, the more these factors matter; the sadder a country is, the less they matter.
+            """)
+
+
         st.markdown("- **Corruption scores** sometimes don’t match happiness.")
         with st.expander("Why this matters"):
             st.markdown("""
@@ -518,7 +527,7 @@ with tabs[3]:
         with st.expander("Why this matters"):
             st.markdown("""
             - **Spain, Italy, Brazil** → middle-range happiness scores.
-            - Extremes: **Finland** (high), **Chad** (low).
+            - Extremes: **Finland** (high); **Chad**, **Afghanistan** (low).
             """)
 
         st.markdown("- **Small countries with high generosity can be happy**")
