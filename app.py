@@ -326,8 +326,331 @@ with tabs[2]:
 
     st.success("Dataset successfully cleaned and prepared for further analysis.")
 
+
+# ANALYSIS & INSIGHTS SECTION
 with tabs[3]:
-    st.write("Provide interactive visualizations of your results (e.g., scatter plots, cluster maps, regression lines). Highlight key insights, patterns, trends, or anomalies. Add filters or sliders to allow users to explore the data further.")
+    st.title("Analysis & Insights")
+
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    from sklearn.linear_model import LinearRegression
+    from sklearn.cluster import KMeans
+    import numpy as np
+    from streamlit_plotly_events import plotly_events
+    import plotly.express as px
+
+
+    st.markdown("---")
+
+    # -------------------------------
+    # 1. Filters & Sliders
+    # -------------------------------
+    st.subheader("Data Filters")
+    min_score, max_score = st.slider(
+        "Happiness Score Range",
+        float(df_clean["Ladder score"].min()),
+        float(df_clean["Ladder score"].max()),
+        (float(df_clean["Ladder score"].min()), float(df_clean["Ladder score"].max()))
+    )
+
+    min_gdp, max_gdp = st.slider(
+        "GDP Range",
+        float(df_clean["Explained by: Log GDP per capita"].min()),
+        float(df_clean["Explained by: Log GDP per capita"].max()),
+        (float(df_clean["Explained by: Log GDP per capita"].min()), float(df_clean["Explained by: Log GDP per capita"].max()))
+    )
+
+    # Apply filters
+    df_filtered = df_clean.copy()
+    df_filtered = df_filtered[(df_filtered["Ladder score"] >= min_score) & (df_filtered["Ladder score"] <= max_score)]
+    df_filtered = df_filtered[(df_filtered["Explained by: Log GDP per capita"] >= min_gdp) & (df_filtered["Explained by: Log GDP per capita"] <= max_gdp)]
+
+    st.markdown("> TIP: Use these sliders to select a range of happiness scores and GDP values. The visualizations will update to show only countries within the chosen ranges!")
+
+    # -------------------------------
+    # 2. Interactive Scatter Plots
+    # -------------------------------
+    st.markdown("---")
+    st.subheader("Interactive Scatter Plot")
+    factor_dict = {
+        "GDP per capita": "Explained by: Log GDP per capita",
+        "Social Support": "Explained by: Social support",
+        "Life Expectancy": "Explained by: Healthy life expectancy",
+        "Freedom": "Explained by: Freedom to make life choices",
+        "Generosity": "Explained by: Generosity",
+        "Corruption": "Explained by: Perceptions of corruption"
+    }
+
+    selected_factor = st.selectbox("Select Factor for Scatter Plot:", list(factor_dict.keys()))
+    col_name = factor_dict[selected_factor]
+
+    fig_scatter = px.scatter(
+        df_filtered,
+        x=col_name,
+        y="Ladder score",
+        hover_name="Country name",
+        hover_data={
+            "Ladder score": True,
+            col_name: True,
+            "Explained by: Social support": True,
+            "Explained by: Healthy life expectancy": True,
+            "Explained by: Freedom to make life choices": True,
+            "Explained by: Generosity": True,
+            "Explained by: Perceptions of corruption": True
+        },
+        title=f"Happiness vs {selected_factor}",
+    )
+
+    # Add regression line for strongest predictors only
+    if selected_factor in ["GDP per capita", "Social Support", "Life Expectancy"]:
+        X = df_filtered[[col_name]].values
+        y = df_filtered["Ladder score"].values
+        model = LinearRegression()
+        model.fit(X, y)
+        df_filtered['pred'] = model.predict(X)
+        fig_scatter.add_traces(
+            px.line(df_filtered, x=col_name, y='pred').data
+        )
+
+    st.plotly_chart(fig_scatter, use_container_width=True)
+    st.markdown("> TIP: Hover on each dot to see country details.")
+
+    # -------------------------------
+    # 3. Correlation Heatmap
+    # -------------------------------
+    st.markdown("---")
+    st.subheader("Correlation Heatmap")
+    features = [
+        "Ladder score",
+        "Explained by: Log GDP per capita",
+        "Explained by: Social support",
+        "Explained by: Healthy life expectancy",
+        "Explained by: Freedom to make life choices",
+        "Explained by: Generosity",
+        "Explained by: Perceptions of corruption"
+    ]
+    corr = df_filtered[features].corr()
+
+    fig2, ax2 = plt.subplots(figsize=(10,7))
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", ax=ax2)
+    st.pyplot(fig2)
+    st.markdown("> This heatmap shows correlations in the filtered dataset. GDP, Social Support, and Life Expectancy are strongest. Freedom, Generosity, and Corruption show weaker or inconsistent patterns.")
+
+    # -------------------------------
+    # 4. K-Means Cluster Map
+    # -------------------------------
+    st.markdown("---")
+    st.subheader("Cluster Map (K-Means)")
+    k = st.slider("Select number of clusters (k):", 2, 6, 3)
+    kmeans_features = features[1:]  # exclude Ladder score
+    kmeans_model = KMeans(n_clusters=k, random_state=42)
+    df_filtered['Cluster'] = kmeans_model.fit_predict(df_filtered[kmeans_features])
+
+    st.markdown("> TIP: Use this slider to choose how many clusters to divide countries into. Hover on each dot to see country details.")
+
+    if 'Country name' in df_filtered.columns:
+        fig3 = px.scatter_geo(
+            df_filtered,
+            locations="Country name",
+            locationmode="country names",
+            color="Cluster",
+            hover_name="Country name",
+            hover_data=["Ladder score"] + kmeans_features,
+            title=f"Happiness Clusters (k = {k})",
+            projection="natural earth"
+        )
+        st.plotly_chart(fig3, use_container_width=True)
+
+    st.markdown("> Clusters group countries by overall well-being: middle-range happiness dominates globally, high-income countries cluster together, regional differences visible (Europe high, Africa low, Asia mixed).")
+
+    # -------------------------------
+    # 5. Key Insights & Patterns
+    # -------------------------------
+    st.markdown("---")
+    st.subheader("Key Insights & Patterns")
+
+    st.markdown("- **GDP per capita, Social Support, Life Expectancy** are the strongest factors for happiness.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Switzerland, Norway, Denmark**: high GDP, strong social support, long healthy lives → high happiness.
+        """)
+
+    st.markdown("- **Freedom & Generosity** have weaker links to happiness.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Costa Rica**: high generosity but moderate happiness.
+        - **Japan**: high freedom but average happiness.
+        """)
+
+    st.markdown("- **Corruption scores** sometimes don’t match happiness.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Singapore**: some perceived corruption but high happiness.
+        """)
+
+    st.markdown("- **Clusters** group countries by income and happiness.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - High-income: **Switzerland, Norway, Singapore** → high happiness.
+        - Middle-income: **Mexico, Thailand, Brazil** → medium happiness.
+        - Low-income: **Chad, Sierra Leone, Afghanistan** → lower happiness.
+        """)
+
+    st.markdown("- **Regions differ**: Europe = high, Africa = low, Asia = mixed.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - Europe: **Finland, Denmark** → high happiness.
+        - Africa: **Nigeria, Kenya** → lower happiness.
+        - Asia: **Japan, South Korea** → high GDP but mixed happiness; **India, Pakistan** → lower scores.
+        """)
+
+    st.markdown("- **Outliers** exist in scatter plots.")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **USA**: very high GDP, moderate happiness.
+        - **Bhutan**: lower GDP, relatively high happiness.
+        """)
+
+    st.markdown("- **Two factors together matter more**")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Norway**: high GDP + strong social support = highest happiness.
+        - **Iceland**: healthy life expectancy also high → higher happiness.
+        """)
+
+    st.markdown("- **Most countries are in the middle range**")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Spain, Italy, Brazil** → middle-range happiness scores.
+        - Extremes: **Finland** (high), **Chad** (low).
+        """)
+
+    st.markdown("- **Small countries with high generosity can be happy**")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - **Costa Rica, New Zealand** → high generosity + social cohesion boosts happiness.
+        """)
+
+    st.markdown("- **Freedom matters more in some regions**")
+    with st.expander("Why this matters"):
+        st.markdown("""
+        - Europe: **Sweden, Denmark** → stronger link between freedom and happiness.
+        - Asia/Africa: less effect; culture/government style may reduce impact.
+        """)
+
+    # -------------------------------
+    # 6. Interactive World Map with Click Info
+    # -------------------------------
+
+    # Function to generate dumbed-down description for each factor
+    def get_dumb_description(row):
+        desc = {}
+
+        # Happiness Score
+        if row["Ladder score"] < 4:
+            desc["Happiness Score"] = "Low happiness (compared to other countries)"
+        elif row["Ladder score"] <= 6:
+            desc["Happiness Score"] = "Moderate happiness (compared to other countries)"
+        else:
+            desc["Happiness Score"] = "High happiness (compared to other countries)"
+
+        # GDP per Capita
+        gdp = row["Explained by: Log GDP per capita"]
+        if gdp < 1.0:
+            desc["GDP per Capita"] = "Low income / Poor country (relative to global dataset)"
+        elif gdp <= 1.5:
+            desc["GDP per Capita"] = "Middle income (relative to global dataset)"
+        else:
+            desc["GDP per Capita"] = "High income / Rich country (relative to global dataset)"
+
+        # Social Support
+        support = row["Explained by: Social support"]
+        if support < 0.8:
+            desc["Social Support"] = "Weak social support (compared to global average)"
+        elif support <= 1.2:
+            desc["Social Support"] = "Moderate support (compared to global average)"
+        else:
+            desc["Social Support"] = "Strong support (compared to global average)"
+
+        # Healthy Life Expectancy
+        life = row["Explained by: Healthy life expectancy"]
+        if life < 0.5:
+            desc["Life Expectancy"] = "Shorter life expectancy (relative to global average)"
+        elif life <= 0.8:
+            desc["Life Expectancy"] = "Moderate life expectancy (relative to global average)"
+        else:
+            desc["Life Expectancy"] = "Longer life expectancy (relative to global average)"
+
+        # Freedom
+        freedom = row["Explained by: Freedom to make life choices"]
+        if freedom < 0.3:
+            desc["Freedom"] = "Limited freedom (compared to other countries)"
+        elif freedom <= 0.6:
+            desc["Freedom"] = "Some freedom (compared to other countries)"
+        else:
+            desc["Freedom"] = "Lots of freedom (compared to other countries)"
+
+        # Generosity
+        gen = row["Explained by: Generosity"]
+        if gen < 0.1:
+            desc["Generosity"] = "Low generosity (relative to global dataset)"
+        elif gen <= 0.3:
+            desc["Generosity"] = "Moderate generosity (relative to global dataset)"
+        else:
+            desc["Generosity"] = "Very generous (relative to global dataset)"
+
+        # Corruption
+        corr = row["Explained by: Perceptions of corruption"]
+        if corr < 0.2:
+            desc["Corruption"] = "Higher perceived corruption (compared to global average)"
+        elif corr <= 0.4:
+            desc["Corruption"] = "Moderate perceived corruption (compared to global average)"
+        else:
+            desc["Corruption"] = "Lower perceived corruption (compared to global average)"
+
+        return desc
+
+
+    st.markdown("---")
+    st.subheader("Explore Countries")
+
+    # Simple description data for hover/click
+    df_map = df_filtered.copy()
+    df_map['Short Description'] = df_map.apply(lambda row: "\n".join([
+        f"- Happiness Score: {row['Ladder score']:.3f} → {'high' if row['Ladder score'] > df_map['Ladder score'].mean() else 'low'} (relative to global average).",
+        f"- GDP per Capita: {row['Explained by: Log GDP per capita']:.3f} → {'rich' if row['Explained by: Log GDP per capita'] > df_map['Explained by: Log GDP per capita'].mean() else 'poor'} country (relative to global average).",
+        f"- Social Support: {row['Explained by: Social support']:.3f} → {'strong' if row['Explained by: Social support'] > df_map['Explained by: Social support'].mean() else 'weak'} support (relative to global average).",
+        f"- Life Expectancy: {row['Explained by: Healthy life expectancy']:.3f} → {'long' if row['Explained by: Healthy life expectancy'] > df_map['Explained by: Healthy life expectancy'].mean() else 'short'} life (relative to global average).",
+        f"- Freedom: {row['Explained by: Freedom to make life choices']:.3f} → {'lots' if row['Explained by: Freedom to make life choices'] > df_map['Explained by: Freedom to make life choices'].mean() else 'limited'} freedom (relative to global average).",
+        f"- Generosity: {row['Explained by: Generosity']:.3f} → {'very generous' if row['Explained by: Generosity'] > df_map['Explained by: Generosity'].mean() else 'less generous'} (relative to global average).",
+        f"- Corruption: {row['Explained by: Perceptions of corruption']:.3f} → {'lower perceived corruption' if row['Explained by: Perceptions of corruption'] > df_map['Explained by: Perceptions of corruption'].mean() else 'higher perceived corruption'} (compared to global average)."
+    ]), axis=1)
+
+    # World map
+    fig_map = px.choropleth(
+        df_map,
+        locations="Country name",
+        locationmode="country names",
+        color="Ladder score",
+        hover_name="Country name",
+        hover_data=["Short Description"],
+        color_continuous_scale="Viridis",
+        title="Click on a country to see its info!",
+    )
+
+    selected_country = st.plotly_chart(fig_map, use_container_width=True)
+
+    country_info = st.empty()
+
+    country_list = df_map["Country name"].sort_values().tolist()
+    clicked_country = st.selectbox("Select a country to see details:", ["None"] + country_list)
+
+    if clicked_country != "None":
+        info_row = df_map[df_map["Country name"] == clicked_country].iloc[0]
+        st.markdown(f"**{clicked_country} Details:**")
+        st.markdown(info_row["Short Description"])
+
+
 
 #conclusion and recommendations
 with tabs[4]:
