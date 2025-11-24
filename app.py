@@ -69,8 +69,7 @@ with tabs[0]:
     # Display each question in a box
     for q in questions:
         st.markdown(f"""
-        <div style='padding: 15px; margin-bottom: 10px; background-color:#FFF8E1; 
-                    border-left: 4px solid #FBC02D; border-radius: 8px;'>
+        <div class="custom-box" style='margin-bottom: 10px;'>
             <b>{q}</b>
         </div>
         """, unsafe_allow_html=True)
@@ -87,7 +86,7 @@ with tabs[0]:
 
     with col1:
         st.markdown("""
-        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+        <div class="custom-box"'>
             <b>Descriptive Analysis</b><br>
             Summarizes the distribution of happiness scores and key indicators.
         </div>
@@ -96,7 +95,7 @@ with tabs[0]:
         st.markdown("<br>", unsafe_allow_html=True)
 
         st.markdown("""
-        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+        <div class="custom-box">
             <b>Correlation Analysis</b><br>
             Examines relationships between happiness scores and related variables.
         </div>
@@ -104,7 +103,7 @@ with tabs[0]:
 
     with col2:
         st.markdown("""
-        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+        <div class="custom-box">
             <b>Multiple Linear Regression</b><br>
             Models how predictors such as GDP and social support influence happiness.
         </div>
@@ -113,7 +112,7 @@ with tabs[0]:
         st.markdown("<br>", unsafe_allow_html=True)
 
         st.markdown("""
-        <div style='padding:15px; border-radius:10px; background:#FFF8E1; border-left:4px solid #FDB12A;'>
+        <div class="custom-box">
             <b>Cluster Analysis</b><br>
             Groups countries with similar happiness profiles (e.g., via K-Means).
         </div>
@@ -128,7 +127,7 @@ with tabs[0]:
     st.subheader("Expected Outcome")
 
     st.markdown("""
-    <div style='padding: 15px; background-color:#FFF8E1; border-left: 4px solid #FDB12A; border-radius: 8px; text-align: justify;'>
+    <div class="custom-box" style='text-align: justify;'>
     This study is expected to identify the key factors that most significantly influence national
     happiness scores. Through correlation and regression analysis, we aim to quantify the impact
     of indicators such as GDP, social support, life expectancy, freedom, and generosity.  

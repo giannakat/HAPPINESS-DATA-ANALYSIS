@@ -96,3 +96,10 @@ button[role="tab"]:focus {
     color: #0f6a69;
 }
 
+.custom-box{
+    padding: 15px;
+    background-color: #FFF8E1;
+    border-left: 4px solid #FBC02D;
+    border-radius: 8px;
+}
+
