@@ -536,11 +536,10 @@ with tabs[3]:
 
     with subtabs[1]:
         # -------------------------------
-        # 1. Interactive World Map with Click Info
+        # Interactive World Map with Click Info
         # -------------------------------
 
         st.markdown("---")
-
         st.subheader("Factor Filters")
 
         # Sliders for filtering factors
@@ -611,7 +610,7 @@ with tabs[3]:
         st.markdown("---")
         st.subheader("World Map")
 
-        # Simple description data for hover/click
+        # Simple description data for click
         df_map = df_filtered.copy()
         df_map['Short Description'] = df_map.apply(lambda row: "\n".join([
             f"- **Happiness Score**: {row['Ladder score']:.3f} → {'high' if row['Ladder score'] > df_map['Ladder score'].mean() else 'low'} (relative to global average).",
@@ -675,7 +674,6 @@ with tabs[3]:
         )
 
         st.plotly_chart(fig_map, use_container_width=True) # display map
-
 
         # country selector
         country_info = st.empty()
