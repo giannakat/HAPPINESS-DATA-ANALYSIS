@@ -19,16 +19,6 @@ tabs = st.tabs(["Overview", "Dataset", "Exploration", "Analysis", "Conclusions"]
 
 with tabs[0]:
     st.markdown("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
-
-    .global-happiness {
-        font-family: 'Poppins', sans-serif;
-        font-weight: 800;
-        font-size: 2.8rem;
-        color: #0f6a69;
-    }
-    </style>
     <br>
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
     UNDERSTANDING<br> 
