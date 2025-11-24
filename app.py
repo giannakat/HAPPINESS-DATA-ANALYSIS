@@ -1,5 +1,12 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
+import numpy as np
+from streamlit_plotly_events import plotly_events
+import plotly.express as px
 
 # styles
 with open("styles/main.css") as f:
@@ -330,15 +337,6 @@ with tabs[2]:
 # ANALYSIS & INSIGHTS SECTION
 with tabs[3]:
     st.title("Analysis & Insights")
-
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    from sklearn.linear_model import LinearRegression
-    from sklearn.cluster import KMeans
-    import numpy as np
-    from streamlit_plotly_events import plotly_events
-    import plotly.express as px
-
 
     st.markdown("---")
 
