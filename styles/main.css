@@ -101,5 +101,6 @@ button[role="tab"]:focus {
     background-color: #FFF8E1;
     border-left: 4px solid #FBC02D;
     border-radius: 8px;
+    color: #222222;
 }
 
