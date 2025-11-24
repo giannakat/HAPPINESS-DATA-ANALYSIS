@@ -638,6 +638,7 @@ with tabs[3]:
         title="Click on a country to see its info!",
     )
 
+    # country selector
     selected_country = st.plotly_chart(fig_map, use_container_width=True)
 
     country_info = st.empty()
