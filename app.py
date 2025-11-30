@@ -17,6 +17,7 @@ df = pd.read_csv("WHR2024.csv")
 
 tabs = st.tabs(["Overview", "Dataset", "Exploration", "Analysis", "Conclusions"])
 
+# INTRODUCTION
 with tabs[0]:
     st.markdown("""
     <br>
@@ -34,9 +35,10 @@ with tabs[0]:
         """
         <div style='text-align: justify;'>
         <h4>Introduction</h4>
-        This project analyzes the <b>World Happiness Report 2024</b> to understand what drives 
-        happiness across nations. By applying correlation, regression, and clustering techniques, 
-        we uncover meaningful patterns and relationships among global well-being indicators.
+        This project explores the <b>World Happiness Report 2024</b> to uncover the key
+        factors that shape global well-being. Through interactive visualizations and 
+        analytical models, we examine how socioeconomic indicators contribute to a country's
+        happiness score.
         </div>
         """,
         unsafe_allow_html=True
@@ -45,9 +47,87 @@ with tabs[0]:
     with col2:
         st.image("assets/happiness.jpg", use_container_width=True)
 
-    st.write("")
-    st.write("")
-    st.write("")
+   
+    st.markdown(
+        """
+        <div style='text-align: justify;'>
+        <h5>What the App Does</h5>
+        <div class="custom-box" style='margin-bottom: 10px;'>
+            <b>Presents the 2024 happiness dataset in an interactive and accessible format</b>
+        </div>
+        <div class="custom-box" style='margin-bottom: 10px;'>
+            <b>Analyzes relationships between happiness and socioeconomic indicators</b>
+        </div>
+        <div class="custom-box" style='margin-bottom: 10px;'>
+            <b>Builds predictive and clustering models to reveal global patterns</b>
+        </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+    
+    st.markdown(
+        """
+        <div style="
+        text-align: justify;
+        border: 2px solid #FDB12A; 
+        padding: 15px;
+        border-radius: 10px;
+        background-color: transparent;
+        margin-top: 30px;
+        ">
+        <h5 style="text-align: center">Why It Matters</h5>
+            Understanding what influences happiness helps governments, researchers, and 
+            communities identify which areas—such as health, economy, freedom, or social 
+            support—create meaningful improvements in quality of life.
+
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+
+    st.markdown(
+        """
+        <div style='text-align: justify; margin-top: 30px;'>
+        <h5>What Users Will Learn</h5>
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+    
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("""
+        <div class="custom-box"'>
+            <b>Which indicators have the strongest impact on happiness</b>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="custom-box">
+            <b>How regions and countries differ in their well-being profiles</b>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="custom-box">
+            <b>The global clusters of countries based on shared characteristics</b>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="custom-box">
+            <b>How well happiness scores can be predicted using measurable data</b>
+        </div>
+        """, unsafe_allow_html=True)
 
     st.divider()
 
@@ -151,50 +231,205 @@ with tabs[1]:
     st.title("Dataset Overview")
 
     #ABOUT THE DATASET
-    st.subheader("About the Dataset")
 
-    st.write("""
-    The **World Happiness Report** is a global survey that evaluates the state of happiness
-    across countries. It is widely used by governments, organizations, and policymakers to
-    understand well-being and guide policy decisions.
-
-    The report combines research from multiple fields—including economics, psychology,
-    public policy, survey analysis, and statistics—to evaluate and compare life
-    satisfaction among nations. Data is primarily sourced from the **Gallup World Poll**.
-
-    **Interpretation of the Columns**  
-    The happiness score (*Ladder Score*) represents each country’s overall life evaluation.
-    The remaining variables estimate the contribution of six key factors:
-    - Economic production (Log GDP per capita)  
-    - Social support  
-    - Healthy life expectancy  
-    - Freedom to make life choices  
-    - Generosity  
-    - Perceptions of corruption  
-
-    These factors do **not directly add up to the total score**, but they help explain why
-    some countries rank higher or lower by comparing them to *Dystopia*—a hypothetical
-    country with the lowest global values for each factor.
-    """)
-
-    st.divider()
-
-    st.write(
+    st.markdown(
         """
-        Below is a structured summary of the World Happiness Report 2024 dataset,
-        including column names, data types, and descriptions of each variable.
-        """
+        <div style="
+        text-align: justify;
+        border: 2px solid #FDB12A; 
+        padding: 15px;
+        border-radius: 10px;
+        background-color: transparent;
+        margin-top: 30px;
+        ">
+        <h5 style="text-align: center">About the Dataset</h5>
+            The <b>World Happiness Report</b> is a global survey that evaluates the state of happiness
+            across countries. It is widely used by governments, organizations, and policymakers to
+            understand well-being and guide policy decisions. 
+            The dataset integrates insights from economics, psychology, public policy, and social research, with most of its indicators sourced from the <b>Gallup World Poll</b>, 
+            making it one of the most reliable benchmarks for studying life satisfaction worldwide.
+        </div>
+        """,
+        unsafe_allow_html=True
+        )
+
+
+    st.markdown("""
+    <div style='text-align: justify;margin-top: 30px;'>
+        <h4>Interpretation of the Columns</h4>
+        The dataset provides a detailed breakdown of the factors influencing each country's
+        Happiness Score (also called the <b>Ladder Score</b>). This score represents how people
+        rate their overall life satisfaction on a scale from 0 to 10.
+    </div>
+    <br>
+    """, unsafe_allow_html=True)
+
+    def info_box(title, description):
+        st.markdown(
+            f"""
+            <div style="
+                border-left: 2px solid #FDB12A;
+                border-radius: 8px;
+                padding: 12px 15px;
+                margin-bottom: 12px;
+                background-color: #FFF8E1;
+            ">
+                <b style="font-size:1.2rem;">{title}</b><br>
+                <span style="font-size:0.9rem; text-align: justify; display:block;">
+                    {description}
+                </span>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    col1, col2= st.columns(2)
+
+    with col1:
+        info_box(
+        "Ladder Score (Happiness Score)",
+        "The main metric of the report. Represents how people rate their current lives on a scale of 0–10, based on the Cantril ladder of life evaluation."
+        )
+
+    with col2:
+        info_box(
+        "Log GDP per Capita",
+        "Reflects the economic strength of a country. Higher income levels generally enable better living conditions, access to services, and financial security."
+        )
+
+
+    col1, col2= st.columns(2)
+    with col1:
+         info_box(
+        "Social Support",
+        "Measures whether individuals feel they have someone to rely on during difficult times. Strong social networks significantly improve well-being."
+        )
+
+    with col2:
+        info_box(
+        "Healthy Life Expectancy",
+        "Estimates how many years an average person can expect to live in good health, which directly influences overall life satisfaction."
     )
 
-    # DATASET PREVIEW
-    with st.expander("📌 Dataset Preview"):
-        st.dataframe(df, use_container_width=True)
+    col1, col2= st.columns(2)
+    with col1:
+        info_box(
+        "Freedom to Make Life Choices",
+        "Captures how much control people feel they have over their decisions, such as career, lifestyle, and personal aspirations."
+    )
 
+    with col2:
+        info_box(
+        "Healthy Life Expectancy",
+        "Estimates how many years an average person can expect to live in good health, which directly influences overall life satisfaction."
+    )
+        
+    col1, col2= st.columns(2)
+    with col1:
+        info_box(
+        "Freedom to Make Life Choices",
+        "Captures how much control people feel they have over their decisions, such as career, lifestyle, and personal aspirations."
+    )
+
+    with col2:
+        info_box(
+        "Generosity",
+        "Based on self-reported charitable behavior. Acts of kindness and contributions to others correlate positively with happiness."
+    )
+        
+    col1, col2= st.columns(2)
+    with col1:
+        info_box(
+        "Perceptions of Corruption",
+        "Indicates public trust toward government and business institutions. Lower corruption improves social stability and confidence."
+    )
+
+    with col2:
+        info_box(
+        "Dystopia Residual",
+        "Represents the unexplained portion of happiness that is not directly tied to the measured indicators — including culture, environment, and other unique national factors."
+    )
+
+    st.markdown("""
+    <div style='text-align: justify;margin-top: 30px;'>
+        Above are the key contributing indicators used in the World Happiness Report. These
+        components do <b>not</b> add up to the total score directly; instead, they represent how
+        much each factor helps explain a country's deviation from <i>Dystopia</i> — a hypothetical
+        nation with the lowest possible values for every indicator.<br>
+    </div>
+    """,
+            unsafe_allow_html=True
+        )
+    
     st.divider()
 
-    # STRUCTURE TABLE
-    st.subheader("📊 Dataset Structure")
+    # SUMMARY STATISTICS
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Summary Statistics
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # First row of metrics
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Countries", df.shape[0])
+    col2.metric("Avg Happiness Score", f"{df['Ladder score'].mean():.2f}")
+    col3.metric("Max Happiness Score", f"{df['Ladder score'].max():.2f}")
 
+    # Second row of metrics
+    col4, col5, col6 = st.columns(3)
+    col4.metric("Min Happiness Score", f"{df['Ladder score'].min():.2f}")
+    col5.metric("Std Dev Happiness Score", f"{df['Ladder score'].std():.2f}")
+    col6.metric("Median Happiness Score", f"{df['Ladder score'].median():.2f}")
+   
+
+    # DATASET PREVIEW
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Dataset Preview
+    </div>
+    """, unsafe_allow_html=True)
+    st.dataframe(df, use_container_width=True)
+
+    # STRUCTURE TABLE
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Dataset Structure
+    </div>
+    """, unsafe_allow_html=True)
     structure_df = pd.DataFrame({
         "Data Type": df.dtypes.astype(str),
         "Description": [
@@ -214,12 +449,28 @@ with tabs[1]:
 
     st.dataframe(structure_df, use_container_width=True)
 
-    st.divider()
-
     # SUMMARY STATISTICS
-    st.subheader("📈 Summary Statistics")
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Full Summary Table
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Full summary table
     st.write(df.describe())
 
+# EXPLORATION
 with tabs[2]:
     st.title("Data Preparation & Exploration")
 
@@ -321,7 +572,6 @@ with tabs[2]:
     """)
 
     st.success("Dataset successfully cleaned and prepared for further analysis.")
-
 
 # ANALYSIS & INSIGHTS SECTION
 with tabs[3]:
@@ -683,8 +933,6 @@ with tabs[3]:
             info_row = df_map[df_map["Country name"] == clicked_country].iloc[0]
             st.markdown(f"**{clicked_country} Details:**")
             st.markdown(info_row["Short Description"])
-
-
 
 #conclusion and recommendations
 with tabs[4]:
