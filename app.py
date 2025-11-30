@@ -691,28 +691,57 @@ with tabs[4]:
     st.markdown("""
     <br>
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Conclusions & Recommendations</span><br> 
+        <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Conclusions & Recommendations</span><br>
+        <span style="font-size:1.2rem;">A Look Back at What We Discovered</span>
     </h1>
     """, unsafe_allow_html=True)
 
-    st.markdown("### A Look Back at What We Discovered")
-
     st.markdown("""
-    Based on the analysis conducted:
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
-    - Happiness tends to settle around the global “middle ground,” showing diverse yet 
-      balanced distribution across countries.
-    - Variables such as **GDP per capita, social support, and healthy life expectancy**
-        displayed the strongest relationships with happiness scores.
-    - Among all factors, **GDP per capita** shines the brightest in its connection to 
-      happiness, highlighting how financial stability supports overall well-being.
-    - Cluster analysis suggested that countries can be grouped based on **socioeconomic
-        and well-being indicators**, showing clear regional or developmental patterns.
-    """)
+    st.markdown("These are the variables that displayed the strongest relationships with happiness scores.")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div class="custom-box"'>
+            <b>GDP per Capita</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="custom-box">
+            <b>Social Support</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class="custom-box"'>
+            <b>Healthy Life Expectancy</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+    
+    st.markdown("Among all factors, **GDP per capita** shines the brightest in its connection to happiness, highlighting how financial stability supports overall well-being.")
 
     st.divider()
 
-    st.markdown("### Dive Deeper Into an Insight")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">More Insights</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
     insight_option = st.selectbox(
         "Choose a perspective to explore:",
@@ -727,7 +756,7 @@ with tabs[4]:
     insight_texts = {
         "Overall Conclusion":
             "The findings emphasize a simple truth: societies flourish when their people are "
-            "supported economically, socially, and health-wise. Happiness isn’t random,it reflects "
+            "supported economically, socially, and health-wise. Happiness isn’t random, it reflects "
             "the environment people live in.",
         
         "Strongest Correlation":
@@ -744,13 +773,24 @@ with tabs[4]:
             "While the dataset provides valuable insights, the removal of missing entries may have "
             "slightly narrowed the representation. Additionally, happiness is shaped by many subtle "
             "factors that were not fully captured here, such as culture, values, and mental health."
-    }
+        }
 
-    st.text_area("Insight Details", insight_texts[insight_option], height=150)
+    st.markdown(
+        f"""
+        <div class="custom-box">
+            {insight_texts[insight_option]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.divider()
 
-    st.markdown("### Recommendations Moving Forward")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Recommendations Moving Forward</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
     rec_category = st.selectbox(
         "Select a recommendation focus:",
@@ -768,7 +808,7 @@ with tabs[4]:
             "and possibility.",
 
         "For Researchers":
-            "Happiness is complex, to understand it more deeply, future research should explore "
+            "Happiness is complex. To understand it more deeply, future research should explore "
             "additional angles such as cultural norms, psychological well-being, environmental "
             "factors, and education-related indicators.",
 
@@ -778,20 +818,35 @@ with tabs[4]:
             "will enrich future analyses."
     }
 
-    st.text_area("Recommendation Details", recommendations[rec_category], height=150)
+    st.markdown(
+        f"""
+        <div class="custom-box">
+            {recommendations[rec_category]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.divider()
 
-    st.subheader("Final Thoughts")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Final Thoughts</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
-    st.write(
+    st.markdown(
     """
-    Happiness is more than a number — it is a reflection of how effectively countries nurture 
+    <p style="font-size:1.5rem; font-weight:600; line-height:1.6; text-align:center;">
+    <b>Happiness is more than a number, it is a reflection of how effectively countries nurture 
     the lives of their people. By understanding the patterns, connections, and limitations 
     uncovered in this analysis, we move closer to building societies where well-being is not 
-    just an aspiration, but an achievable reality for all.
-    """
+    just an aspiration, but an achievable reality for all.</b>
+    </p>
+    """,
+    unsafe_allow_html=True
     )
 
+    st.image("assets/happiness.jpg", use_container_width=True)
 
 
