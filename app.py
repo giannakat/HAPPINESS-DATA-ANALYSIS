@@ -688,31 +688,34 @@ with tabs[3]:
 
 #conclusion and recommendations
 with tabs[4]:
-    st.title("Conclusions & Recommendations")
+    st.markdown("""
+    <br>
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Conclusions & Recommendations</span><br> 
+    </h1>
+    """, unsafe_allow_html=True)
 
-    st.subheader("Summary of Findings")
+    st.markdown("### A Look Back at What We Discovered")
 
-    st.write(
-        """
-        Based on the analysis conducted:
+    st.markdown("""
+    Based on the analysis conducted:
 
-        - Happiness scores showed a **moderately varied distribution** across countries,
-          with most nations clustering around the middle range.
-        - Variables such as **GDP per capita, social support, and healthy life expectancy**
-          displayed the strongest relationships with happiness scores.
-        - Correlation analysis revealed that **GDP per capita had one of the highest positive correlations**
-          with happiness.
-        - Cluster analysis suggested that countries can be grouped based on **socioeconomic
-          and well-being indicators**, showing clear regional or developmental patterns.
-        """
-    )
+    - Happiness tends to settle around the global “middle ground,” showing diverse yet 
+      balanced distribution across countries.
+    - Variables such as **GDP per capita, social support, and healthy life expectancy**
+        displayed the strongest relationships with happiness scores.
+    - Among all factors, **GDP per capita** shines the brightest in its connection to 
+      happiness, highlighting how financial stability supports overall well-being.
+    - Cluster analysis suggested that countries can be grouped based on **socioeconomic
+        and well-being indicators**, showing clear regional or developmental patterns.
+    """)
 
     st.divider()
 
-    st.subheader("Explore Insights")
+    st.markdown("### Dive Deeper Into an Insight")
 
     insight_option = st.selectbox(
-        "Select an insight to view:",
+        "Choose a perspective to explore:",
         [
             "Overall Conclusion",
             "Strongest Correlation",
@@ -721,40 +724,36 @@ with tabs[4]:
         ]
     )
 
-    if insight_option == "Overall Conclusion":
-        st.text_area(
-            "Overall Conclusion",
-            "The analysis suggests that socioeconomic factors such as GDP, social support, and life expectancy play a major role in determining happiness levels across countries.",
-            height=120
-        )
+    insight_texts = {
+        "Overall Conclusion":
+            "The findings emphasize a simple truth: societies flourish when their people are "
+            "supported economically, socially, and health-wise. Happiness isn’t random,it reflects "
+            "the environment people live in.",
+        
+        "Strongest Correlation":
+            "GDP per capita stands out as the most influential factor. Countries with stronger "
+            "economic foundations tend to foster happier populations, suggesting that financial "
+            "stability provides both comfort and opportunity.",
 
-    elif insight_option == "Strongest Correlation":
-        st.text_area(
-            "Strongest Correlation",
-            "GDP per capita showed the strongest correlation with happiness, indicating that higher economic output and resources contribute significantly to well-being.",
-            height=120
-        )
+        "Cluster Pattern":
+            "Countries don’t exist in isolation, and neither do their happiness levels. Cluster "
+            "analysis shows that nations with similar socioeconomic backgrounds naturally group "
+            "together, reflecting shared development paths and cultural dynamics.",
 
-    elif insight_option == "Cluster Pattern":
-        st.text_area(
-            "Cluster Pattern",
-            "Cluster analysis revealed groups of countries with similar happiness profiles, often aligning with geographic regions or economic development levels.",
-            height=120
-        )
+        "Limitations of the Analysis":
+            "While the dataset provides valuable insights, the removal of missing entries may have "
+            "slightly narrowed the representation. Additionally, happiness is shaped by many subtle "
+            "factors that were not fully captured here, such as culture, values, and mental health."
+    }
 
-    elif insight_option == "Limitations of the Analysis":
-        st.text_area(
-            "Limitations",
-            "Missing values required the removal of some rows using dropna(), which may have reduced dataset representation. Model accuracy may also vary due to limited features.",
-            height=120
-        )
+    st.text_area("Insight Details", insight_texts[insight_option], height=150)
 
     st.divider()
 
-    st.subheader("Actionable Recommendations")
+    st.markdown("### Recommendations Moving Forward")
 
     rec_category = st.selectbox(
-        "Select recommendation category:",
+        "Select a recommendation focus:",
         [
             "For Policymakers",
             "For Researchers",
@@ -762,34 +761,36 @@ with tabs[4]:
         ]
     )
 
-    if rec_category == "For Policymakers":
-        default_text = (
-            "Invest in factors with the strongest impact on happiness, such as healthcare, "
-            "economic stability, and social support systems."
-        )
-    elif rec_category == "For Researchers":
-        default_text = (
-            "Include additional variables such as mental health indicators or cultural factors "
-            "to improve model accuracy and explanatory power."
-        )
-    else:
-        default_text = (
-            "Ensure more complete data reporting to reduce missing values and avoid dropping rows "
-            "that affect representation."
-        )
+    recommendations = {
+        "For Policymakers":
+            "Strengthen the foundations that consistently elevate happiness such as reliable healthcare, "
+            "accessible social support, and economic pathways that give citizens a sense of security "
+            "and possibility.",
 
-    st.text_area("Recommendation Details", default_text, height=120)
+        "For Researchers":
+            "Happiness is complex, to understand it more deeply, future research should explore "
+            "additional angles such as cultural norms, psychological well-being, environmental "
+            "factors, and education-related indicators.",
+
+        "For Future Data Collection":
+            "Broader and more complete data can unlock more accurate stories. Improving reporting "
+            "quality, reducing missing values, and gathering more behavioral and cultural metrics "
+            "will enrich future analyses."
+    }
+
+    st.text_area("Recommendation Details", recommendations[rec_category], height=150)
 
     st.divider()
 
     st.subheader("Final Thoughts")
 
     st.write(
-        """
-        These findings highlight the importance of socioeconomic conditions in shaping global happiness.
-        Understanding these relationships can support informed decision-making and future research efforts
-        aimed at improving quality of life.
-        """
+    """
+    Happiness is more than a number — it is a reflection of how effectively countries nurture 
+    the lives of their people. By understanding the patterns, connections, and limitations 
+    uncovered in this analysis, we move closer to building societies where well-being is not 
+    just an aspiration, but an achievable reality for all.
+    """
     )
 
 
