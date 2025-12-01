@@ -103,10 +103,10 @@ button[role="tab"]:focus {
 
 .custom-box{
     padding: 15px;
-    background-color: #FFF8E1;
+    background-color: #FBC02D33;
     border-left: 4px solid #FBC02D;
     border-radius: 8px;
-    color: #222222;
+    color: #ffffff;
 }
 
 /* dataset */
@@ -120,5 +120,5 @@ button[role="tab"]:focus {
     color: #222222;
     font-size: 27px;
     font-weight: bold;
-    margin-bottom: 20px;;
+    margin-bottom: 20px;
 }
