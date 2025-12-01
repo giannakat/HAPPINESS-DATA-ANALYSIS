@@ -936,31 +936,63 @@ with tabs[3]:
 
 #conclusion and recommendations
 with tabs[4]:
-    st.title("Conclusions & Recommendations")
+    st.markdown("""
+    <br>
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+        <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Conclusions & Recommendations</span><br>
+        <span style="font-size:1.2rem;">A Look Back at What We Discovered</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
-    st.subheader("Summary of Findings")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
-    st.write(
-        """
-        Based on the analysis conducted:
+    st.markdown("These are the variables that displayed the strongest relationships with happiness scores.")
 
-        - Happiness scores showed a **moderately varied distribution** across countries,
-          with most nations clustering around the middle range.
-        - Variables such as **GDP per capita, social support, and healthy life expectancy**
-          displayed the strongest relationships with happiness scores.
-        - Correlation analysis revealed that **GDP per capita had one of the highest positive correlations**
-          with happiness.
-        - Cluster analysis suggested that countries can be grouped based on **socioeconomic
-          and well-being indicators**, showing clear regional or developmental patterns.
-        """
-    )
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div class="custom-box"'>
+            <b>GDP per Capita</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class="custom-box">
+            <b>Social Support</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class="custom-box"'>
+            <b>Healthy Life Expectancy</b><br>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+    
+    st.markdown("Among all factors, **GDP per capita** shines the brightest in its connection to happiness, highlighting how financial stability supports overall well-being.")
 
     st.divider()
 
-    st.subheader("Explore Insights")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">More Insights</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
     insight_option = st.selectbox(
-        "Select an insight to view:",
+        "Choose a perspective to explore:",
         [
             "Overall Conclusion",
             "Strongest Correlation",
@@ -969,40 +1001,47 @@ with tabs[4]:
         ]
     )
 
-    if insight_option == "Overall Conclusion":
-        st.text_area(
-            "Overall Conclusion",
-            "The analysis suggests that socioeconomic factors such as GDP, social support, and life expectancy play a major role in determining happiness levels across countries.",
-            height=120
-        )
+    insight_texts = {
+        "Overall Conclusion":
+            "The findings emphasize a simple truth: societies flourish when their people are "
+            "supported economically, socially, and health-wise. Happiness isn’t random, it reflects "
+            "the environment people live in.",
+        
+        "Strongest Correlation":
+            "GDP per capita stands out as the most influential factor. Countries with stronger "
+            "economic foundations tend to foster happier populations, suggesting that financial "
+            "stability provides both comfort and opportunity.",
 
-    elif insight_option == "Strongest Correlation":
-        st.text_area(
-            "Strongest Correlation",
-            "GDP per capita showed the strongest correlation with happiness, indicating that higher economic output and resources contribute significantly to well-being.",
-            height=120
-        )
+        "Cluster Pattern":
+            "Countries don’t exist in isolation, and neither do their happiness levels. Cluster "
+            "analysis shows that nations with similar socioeconomic backgrounds naturally group "
+            "together, reflecting shared development paths and cultural dynamics.",
 
-    elif insight_option == "Cluster Pattern":
-        st.text_area(
-            "Cluster Pattern",
-            "Cluster analysis revealed groups of countries with similar happiness profiles, often aligning with geographic regions or economic development levels.",
-            height=120
-        )
+        "Limitations of the Analysis":
+            "While the dataset provides valuable insights, the removal of missing entries may have "
+            "slightly narrowed the representation. Additionally, happiness is shaped by many subtle "
+            "factors that were not fully captured here, such as culture, values, and mental health."
+        }
 
-    elif insight_option == "Limitations of the Analysis":
-        st.text_area(
-            "Limitations",
-            "Missing values required the removal of some rows using dropna(), which may have reduced dataset representation. Model accuracy may also vary due to limited features.",
-            height=120
-        )
+    st.markdown(
+        f"""
+        <div class="custom-box">
+            {insight_texts[insight_option]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.divider()
 
-    st.subheader("Actionable Recommendations")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Recommendations Moving Forward</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
     rec_category = st.selectbox(
-        "Select recommendation category:",
+        "Select a recommendation focus:",
         [
             "For Policymakers",
             "For Researchers",
@@ -1010,35 +1049,52 @@ with tabs[4]:
         ]
     )
 
-    if rec_category == "For Policymakers":
-        default_text = (
-            "Invest in factors with the strongest impact on happiness, such as healthcare, "
-            "economic stability, and social support systems."
-        )
-    elif rec_category == "For Researchers":
-        default_text = (
-            "Include additional variables such as mental health indicators or cultural factors "
-            "to improve model accuracy and explanatory power."
-        )
-    else:
-        default_text = (
-            "Ensure more complete data reporting to reduce missing values and avoid dropping rows "
-            "that affect representation."
-        )
+    recommendations = {
+        "For Policymakers":
+            "Strengthen the foundations that consistently elevate happiness such as reliable healthcare, "
+            "accessible social support, and economic pathways that give citizens a sense of security "
+            "and possibility.",
 
-    st.text_area("Recommendation Details", default_text, height=120)
+        "For Researchers":
+            "Happiness is complex. To understand it more deeply, future research should explore "
+            "additional angles such as cultural norms, psychological well-being, environmental "
+            "factors, and education-related indicators.",
+
+        "For Future Data Collection":
+            "Broader and more complete data can unlock more accurate stories. Improving reporting "
+            "quality, reducing missing values, and gathering more behavioral and cultural metrics "
+            "will enrich future analyses."
+    }
+
+    st.markdown(
+        f"""
+        <div class="custom-box">
+            {recommendations[rec_category]}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.divider()
 
-    st.subheader("Final Thoughts")
+    st.markdown("""
+    <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
+    <span class="global-happiness" style="color:#FDB12A; font-size:2.8rem;">Final Thoughts</span>
+    </h1>
+    """, unsafe_allow_html=True)
 
-    st.write(
-        """
-        These findings highlight the importance of socioeconomic conditions in shaping global happiness.
-        Understanding these relationships can support informed decision-making and future research efforts
-        aimed at improving quality of life.
-        """
+    st.markdown(
+    """
+    <p style="font-size:1.5rem; font-weight:600; line-height:1.6; text-align:center;">
+    <b>Happiness is more than a number, it is a reflection of how effectively countries nurture 
+    the lives of their people. By understanding the patterns, connections, and limitations 
+    uncovered in this analysis, we move closer to building societies where well-being is not 
+    just an aspiration, but an achievable reality for all.</b>
+    </p>
+    """,
+    unsafe_allow_html=True
     )
 
+    st.image("assets/happiness.jpg", use_container_width=True)
 
 
