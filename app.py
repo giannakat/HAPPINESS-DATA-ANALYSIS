@@ -500,9 +500,9 @@ with tabs[2]:
         font-weight: 700;
         margin-bottom: 20px;
         margin-top: 30px;
-        color: #ffffff;
+        color: #222222;
     ">
-        Missing Values per Column
+        MISSING VALUES PER COLUMN
     </div>
     """, unsafe_allow_html=True)
     st.write(df.isna().sum())
@@ -540,9 +540,9 @@ with tabs[2]:
         font-weight: 700;
         margin-bottom: 40px;
         margin-top: 30px;
-        color: #ffffff;
+        color: #222222;
     ">
-        Rows Removed After Cleaning
+        ROWS REMOVED AFTER CLEANING
     </div>
     """, unsafe_allow_html=True)
 
