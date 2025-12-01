@@ -115,9 +115,11 @@ button[role="tab"]:focus {
 /* F9B800, F7C96F, FFE5A3*/
 .custom-step{
     padding: 10px;
-    background-color: #F9B800;
-    border-radius: 8px;
-    color: #222222;
+    padding-left: 30px;
+    background-color: #FBC02D;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    color: #080808;
     font-size: 27px;
     font-weight: bold;
     margin-bottom: 20px;

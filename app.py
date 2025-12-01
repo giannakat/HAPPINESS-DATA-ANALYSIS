@@ -492,16 +492,16 @@ with tabs[2]:
     # st.write("### Missing Values per Column")
     st.markdown("""
     <div style="
-        background-color: #FBC02D; 
-        width: 100%; 
         text-align: center; 
+        border: 2px solid #FDB12A; 
         padding: 12px 0; 
         border-radius: 8px;
         font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 20px;
+        background-color: transparent;
         margin-top: 30px;
-        color: #222222;
+        margin-bottom: 20px;
+        color: #FDB12A;  
     ">
         MISSING VALUES PER COLUMN
     </div>
@@ -532,16 +532,16 @@ with tabs[2]:
     # SUMMARY STATISTICS
     st.markdown("""
     <div style="
-        background-color: #FBC02D; 
-        width: 100%; 
         text-align: center; 
+        border: 2px solid #FDB12A; 
         padding: 12px 0; 
         border-radius: 8px;
         font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 40px;
+        background-color: transparent;
         margin-top: 30px;
-        color: #222222;
+        margin-bottom: 35px;
+        color: #FDB12A;  
     ">
         ROWS REMOVED AFTER CLEANING
     </div>
