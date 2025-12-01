@@ -449,7 +449,7 @@ with tabs[1]:
 
     st.dataframe(structure_df, use_container_width=True)
 
-    # SUMMARY STATISTICS
+    # SUMMARY table
     st.markdown("""
     <div style="
         background-color: #FBC02D; 
@@ -473,8 +473,12 @@ with tabs[1]:
 # EXPLORATION
 with tabs[2]:
     st.title("Data Preparation & Exploration")
-
-    st.subheader("1. Checking for Missing Values")
+        
+    st.markdown("""
+        <div class="custom-step"'>
+            1. Checking for Missing Values
+        </div>
+        """, unsafe_allow_html=True)
 
     st.write("""
     Before performing any statistical modeling or machine learning, it is essential to 
@@ -484,7 +488,23 @@ with tabs[2]:
     """)
 
     # Show missing values
-    st.write("### Missing Values per Column")
+    # st.write("### Missing Values per Column")
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Missing Values per Column
+    </div>
+    """, unsafe_allow_html=True)
     st.write(df.isna().sum())
 
     st.write("""
@@ -507,17 +527,41 @@ with tabs[2]:
     # Drop missing rows
     df_clean = df.dropna(subset=features).copy()
 
-    st.write("### Rows Removed After Cleaning")
-    st.write(f"- **Original rows:** {len(df)}")
-    st.write(f"- **Rows after cleaning:** {len(df_clean)}")
-    st.write(f"- **Rows removed:** {len(df) - len(df_clean)}")
+    
+    # SUMMARY STATISTICS
+    st.markdown("""
+    <div style="
+        background-color: #FBC02D; 
+        width: 100%; 
+        text-align: center; 
+        padding: 12px 0; 
+        border-radius: 8px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+        margin-top: 30px;
+        color: #ffffff;
+    ">
+        Rows Removed After Cleaning
+    </div>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Original Rows", len(df))
+    col2.metric("Rows After Cleaning", len(df_clean))
+    col3.metric("Rows Removed", len(df) - len(df_clean))
 
     st.divider()
 
     # -----------------------------------------
     # 2. HISTOGRAM OF HAPPINESS SCORES
     # -----------------------------------------
-    st.subheader("2. Distribution of Happiness Scores (Ladder Score)")
+    st.markdown("""
+        <div class="custom-step"'>
+            2. Distribution of Happiness Scores (Ladder Score)
+        </div>
+        """, unsafe_allow_html=True)
 
     st.write("""
     Understanding the distribution of happiness scores helps reveal global patterns, 
@@ -539,7 +583,11 @@ with tabs[2]:
     # -----------------------------------------
     # 3. CORRELATION HEATMAP
     # -----------------------------------------
-    st.subheader("3. Correlation Analysis")
+    st.markdown("""
+        <div class="custom-step"'>
+            3. Correlation Analysis
+        </div>
+        """, unsafe_allow_html=True)
 
     st.write("""
     Correlation analysis helps identify which factors have the strongest relationships 
@@ -561,17 +609,46 @@ with tabs[2]:
     # -----------------------------------------
     # 4. Summary of Data Preparation
     # -----------------------------------------
-    st.subheader("Summary of Data Preparation Steps")
     st.markdown("""
-    - ✔ Checked dataset for missing values  
-    - ✔ Removed rows with missing key feature values  
-    - ✔ Cleaned dataset reduced from **143 to 140 rows**  
-    - ✔ Visualized distribution using histograms  
-    - ✔ Identified relationships using a correlation heatmap  
-    - ✔ Prepared clean dataset for regression and clustering  
-    """)
+        <div class="custom-step"'>
+            4. Summary of Data Preparation Steps
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style="
+        background:#FFE8B3;
+        padding:16px 20px;
+        border-radius:10px;
+        font-size:16px;
+        line-height:1.6;
+        color:#1b1b1b;
+    ">
+        ✔ Checked dataset for missing values<br>
+        ✔ Removed rows with missing key feature values<br>
+        ✔ Cleaned dataset reduced from <b>143 to 140 rows</b><br>
+        ✔ Visualized distribution using histograms<br>
+        ✔ Identified relationships using a correlation heatmap<br>
+        ✔ Prepared clean dataset for regression and clustering
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.success("Dataset successfully cleaned and prepared for further analysis.")
+    st.markdown("""
+    <div style="
+        background-color: #D4EDDA;
+        color: #155724;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 20px;
+        border-left: 6px solid #28A745;
+    ">
+        ✅ Dataset successfully cleaned and prepared for further analysis.
+    </div>
+    """, unsafe_allow_html=True)
+
+
 
 # ANALYSIS & INSIGHTS SECTION
 with tabs[3]:
