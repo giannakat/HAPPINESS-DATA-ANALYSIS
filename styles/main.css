@@ -56,6 +56,11 @@ h1 {
     gap: 0 !important;
 }
 
+.st-c6 {
+    height: 0rem !important;
+}
+
+
 .st-emotion-cache-tn0cau {
     min-height: 800px; /* set minimum height to each tab content */
 }
@@ -73,10 +78,10 @@ button[role="tab"]:focus {
 .stTabs [role="tab"] {
     flex-grow: 1;
     text-align: center;
-    background-color: #f6f6f6;
+    background-color: #000000;
     padding: 8px 18px;
     border-radius: 0;
-    color: #555;
+    color: #ffffff;
     font-weight: 500;
     /* border-bottom: 1px solid #ddd; */
 }
@@ -84,7 +89,7 @@ button[role="tab"]:focus {
 /* Selected Tab */
 .stTabs [aria-selected="true"] {
     background-color: #FBC02D;
-    color: white;
+    color: rgb(0, 0, 0);
     border: 1px solid #FBC02D;
 }
 
