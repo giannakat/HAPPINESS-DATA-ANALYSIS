@@ -1023,7 +1023,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
     </h1>
     """, unsafe_allow_html=True)
 
@@ -1064,7 +1064,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">More Insights</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">More Insights</span>
     </h1>
     """, unsafe_allow_html=True)
 
@@ -1113,7 +1113,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Recommendations Moving Forward</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">Recommendations Moving Forward</span>
     </h1>
     """, unsafe_allow_html=True)
 
