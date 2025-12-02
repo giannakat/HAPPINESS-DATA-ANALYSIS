@@ -48,7 +48,8 @@ with tabs[0]:
     with col2:
         st.image("assets/happiness.jpg", use_container_width=True)
 
-   
+    st.divider()
+    
     st.markdown(
         """
         <div style='text-align: justify;'>
@@ -132,96 +133,96 @@ with tabs[0]:
 
     st.divider()
 
-    st.subheader("Research Question")
-    st.write("""
-    The goal of this project is to identify and understand which factors have the greatest 
-    influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
-    the following questions:
-    """)
+    # st.subheader("Research Question")
+    # st.write("""
+    # The goal of this project is to identify and understand which factors have the greatest 
+    # influence on a country’s happiness score in 2024. Specifically, the study aims to answer 
+    # the following questions:
+    # """)
 
-    # List of research questions
-    questions = [
-        "Which variables are most strongly correlated with happiness scores?",
-        "How do these contributing factors differ among countries or regions?",
-        "Can we group countries into clusters based on their happiness-related indicators?",
-        "Can we predict happiness scores based on measurable socioeconomic factors?"
-    ]
+    # # List of research questions
+    # questions = [
+    #     "Which variables are most strongly correlated with happiness scores?",
+    #     "How do these contributing factors differ among countries or regions?",
+    #     "Can we group countries into clusters based on their happiness-related indicators?",
+    #     "Can we predict happiness scores based on measurable socioeconomic factors?"
+    # ]
 
     # Display each question in a box
-    for q in questions:
-        st.markdown(f"""
-        <div class="custom-box" style='margin-bottom: 10px;'>
-            <b>{q}</b>
-        </div>
-        """, unsafe_allow_html=True)
+    # for q in questions:
+    #     st.markdown(f"""
+    #     <div class="custom-box" style='margin-bottom: 10px;'>
+    #         <b>{q}</b>
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
 
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
 
-    st.divider()
+    # st.divider()
 
-    st.subheader("Chosen Data Analysis Technique")
+    # st.subheader("Chosen Data Analysis Technique")
 
-    col1, col2 = st.columns(2)
+    # col1, col2 = st.columns(2)
 
-    with col1:
-        st.markdown("""
-        <div class="custom-box"'>
-            <b>Descriptive Analysis</b><br>
-            Summarizes the distribution of happiness scores and key indicators.
-        </div>
-        """, unsafe_allow_html=True)
+    # with col1:
+    #     st.markdown("""
+    #     <div class="custom-box"'>
+    #         <b>Descriptive Analysis</b><br>
+    #         Summarizes the distribution of happiness scores and key indicators.
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+    #     st.markdown("<br>", unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="custom-box">
-            <b>Correlation Analysis</b><br>
-            Examines relationships between happiness scores and related variables.
-        </div>
-        """, unsafe_allow_html=True)
+    #     st.markdown("""
+    #     <div class="custom-box">
+    #         <b>Correlation Analysis</b><br>
+    #         Examines relationships between happiness scores and related variables.
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
-    with col2:
-        st.markdown("""
-        <div class="custom-box">
-            <b>Multiple Linear Regression</b><br>
-            Models how predictors such as GDP and social support influence happiness.
-        </div>
-        """, unsafe_allow_html=True)
+    # with col2:
+    #     st.markdown("""
+    #     <div class="custom-box">
+    #         <b>Multiple Linear Regression</b><br>
+    #         Models how predictors such as GDP and social support influence happiness.
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+    #     st.markdown("<br>", unsafe_allow_html=True)
 
-        st.markdown("""
-        <div class="custom-box">
-            <b>Cluster Analysis</b><br>
-            Groups countries with similar happiness profiles (e.g., via K-Means).
-        </div>
-        """, unsafe_allow_html=True)
+    #     st.markdown("""
+    #     <div class="custom-box">
+    #         <b>Cluster Analysis</b><br>
+    #         Groups countries with similar happiness profiles (e.g., via K-Means).
+    #     </div>
+    #     """, unsafe_allow_html=True)
 
 
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
 
-    st.divider()
+    # st.divider()
 
-    st.subheader("Expected Outcome")
+    # st.subheader("Expected Outcome")
 
-    st.markdown("""
-    <div class="custom-box" style='text-align: justify;'>
-    This study is expected to identify the key factors that most significantly influence national
-    happiness scores. Through correlation and regression analysis, we aim to quantify the impact
-    of indicators such as GDP, social support, life expectancy, freedom, and generosity.  
-    Cluster analysis is expected to reveal groups of countries with similar happiness profiles,
-    highlighting regional patterns and socioeconomic similarities.  
-    <br>
-    Overall, these findings will provide actionable insights into global well-being and help
-    policymakers understand which areas require attention to improve quality of life.</div>
-    """, unsafe_allow_html=True)
+    # st.markdown("""
+    # <div class="custom-box" style='text-align: justify;'>
+    # This study is expected to identify the key factors that most significantly influence national
+    # happiness scores. Through correlation and regression analysis, we aim to quantify the impact
+    # of indicators such as GDP, social support, life expectancy, freedom, and generosity.  
+    # Cluster analysis is expected to reveal groups of countries with similar happiness profiles,
+    # highlighting regional patterns and socioeconomic similarities.  
+    # <br>
+    # Overall, these findings will provide actionable insights into global well-being and help
+    # policymakers understand which areas require attention to improve quality of life.</div>
+    # """, unsafe_allow_html=True)
 
-    st.write("")
-    st.write("")
-    st.write("")
+    # st.write("")
+    # st.write("")
+    # st.write("")
     
     with st.expander('References'):
         st.write("Dataset: https://www.kaggle.com/datasets/ajaypalsinghlo/world-happiness-report-2024")
@@ -273,7 +274,7 @@ with tabs[1]:
                 border-radius: 8px;
                 padding: 12px 15px;
                 margin-bottom: 12px;
-                background-color: #FFF8E1;
+                background-color: #FBC02D33;
             ">
                 <b style="font-size:1.2rem;">{title}</b><br>
                 <span style="font-size:0.9rem; text-align: justify; display:block;">
@@ -492,16 +493,16 @@ with tabs[2]:
     # st.write("### Missing Values per Column")
     st.markdown("""
     <div style="
-        background-color: #FBC02D; 
-        width: 100%; 
         text-align: center; 
+        border: 2px solid #FDB12A; 
         padding: 12px 0; 
         border-radius: 8px;
         font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 20px;
+        background-color: transparent;
         margin-top: 30px;
-        color: #222222;
+        margin-bottom: 20px;
+        color: #FDB12A;  
     ">
         MISSING VALUES PER COLUMN
     </div>
@@ -532,16 +533,16 @@ with tabs[2]:
     # SUMMARY STATISTICS
     st.markdown("""
     <div style="
-        background-color: #FBC02D; 
-        width: 100%; 
         text-align: center; 
+        border: 2px solid #FDB12A; 
         padding: 12px 0; 
         border-radius: 8px;
         font-size: 1.8rem;
         font-weight: 700;
-        margin-bottom: 40px;
+        background-color: transparent;
         margin-top: 30px;
-        color: #222222;
+        margin-bottom: 35px;
+        color: #FDB12A;  
     ">
         ROWS REMOVED AFTER CLEANING
     </div>
@@ -1059,7 +1060,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">Top 3 Indicators of Happiness</span>
     </h1>
     """, unsafe_allow_html=True)
 
@@ -1100,7 +1101,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">More Insights</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">More Insights</span>
     </h1>
     """, unsafe_allow_html=True)
 
@@ -1149,7 +1150,7 @@ with tabs[4]:
 
     st.markdown("""
     <h1 style="font-size:2.2rem; font-weight:700; text-align:center;">
-    <span class="global-happiness" style="color:#000000; font-size:1.8rem;">Recommendations Moving Forward</span>
+    <span class="global-happiness" style="color:#FFFFFF; font-size:1.8rem;">Recommendations Moving Forward</span>
     </h1>
     """, unsafe_allow_html=True)
 
