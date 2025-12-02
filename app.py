@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 from streamlit_plotly_events import plotly_events
 import plotly.express as px
@@ -753,14 +754,30 @@ with tabs[3]:
         # -------------------------------
         st.markdown("---")
         st.subheader("Interactive Cluster Map (K-Means)")
+
         k = st.slider("Select number of clusters (k):", 2, 6, 3)
-        kmeans_features = features[1:]  # exclude Ladder score
+
+        # use only the explanatory variables (teacher suggestion)
+        kmeans_features = [
+            "Explained by: Log GDP per capita",
+            "Explained by: Social support",
+            "Explained by: Healthy life expectancy",
+            "Explained by: Freedom to make life choices",
+            "Explained by: Generosity",
+            "Explained by: Perceptions of corruption"
+        ]
+
+        # scale numeric values for fair clustering
+        scaler = StandardScaler()
+        scaled_values = scaler.fit_transform(df_filtered[kmeans_features])
+
+        # run kmeans
         kmeans_model = KMeans(n_clusters=k, random_state=42)
-        df_filtered['Cluster'] = kmeans_model.fit_predict(df_filtered[kmeans_features])
+        df_filtered["Cluster"] = kmeans_model.fit_predict(scaled_values)
 
         st.markdown("> TIP: Use this slider to choose how many clusters to divide countries into. Hover on each dot to see country details.")
 
-        if 'Country name' in df_filtered.columns:
+        if "Country name" in df_filtered.columns:
             fig3 = px.scatter_geo(
                 df_filtered,
                 locations="Country name",
@@ -773,7 +790,26 @@ with tabs[3]:
             )
             st.plotly_chart(fig3, use_container_width=True)
 
-        st.markdown("> Clusters group countries by overall well-being: middle-range happiness dominates globally, high-income countries cluster together, regional differences visible (Europe high, Africa low, Asia mixed).")
+        st.markdown("> These clusters group countries by patterns in income, social support, health, freedom, generosity, and corruption. This reveals hidden groups like 'low income but happy'.")
+
+        # compute cluster indicators
+        cluster_summary = df_filtered.groupby("Cluster")[kmeans_features + ["Ladder score"]].mean()
+
+        cols = st.columns(len(cluster_summary))  # one column per cluster
+
+        for i, c in enumerate(cluster_summary.index):
+            avg = cluster_summary.loc[c]
+
+            gdp = avg["Explained by: Log GDP per capita"]
+            happy = avg["Ladder score"]
+            support = avg["Explained by: Social support"]
+
+            with cols[i]:
+                st.markdown(f"<h4 style='text-decoration: underline;'>Cluster {c}</h4>", unsafe_allow_html=True)
+
+                st.markdown(f"Happiness: **{happy:.2f}**")
+                st.markdown(f"GDP: **{gdp:.2f}**")
+                st.markdown(f"Social support: **{support:.2f}**")
 
         # -------------------------------
         # 5. Key Insights & Patterns
